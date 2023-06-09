@@ -1,0 +1,15 @@
+{
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "/home/jasim/WORK/Jasim/COURSE/web/project_1/University-Management/Logs/success/.4a1b5c3bcc291cef1d5be37c971507947b726068-audit.json",
+  "files": [
+    {
+      "date": 1686286965223,
+      "name": "/home/jasim/WORK/Jasim/COURSE/web/project_1/University-Management/Logs/success/U-M-2023-09-06-10-success.log",
+      "hash": "08e4ed8ec32b43315403a2d9b4d976bad68deeacbb3af25af61bbf775271ad87"
+    }
+  ],
+  "hashType": "sha256"
+}
