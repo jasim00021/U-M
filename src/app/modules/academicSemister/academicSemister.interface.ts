@@ -1,36 +1,28 @@
-import { Model } from 'mongoose'
+import { Model } from 'mongoose';
+
+export type IMonth =
+  | 'January'
+  | 'February'
+  | 'March'
+  | 'April'
+  | 'May'
+  | 'June'
+  | 'July'
+  | 'August'
+  | 'September'
+  | 'October'
+  | 'November'
+  | 'December';
+export type ITitle = 'Autumn' | 'Summer' | 'Fail';
+export type ICode = '01' | '02' | '03';
 
 export type IAcademicSemister = {
-  title: 'Autumn' | 'Summer' | 'Fail'
-  year: number
-  code: '01' | '02' | '03'
-  startMonth:
-    | 'January'
-    | 'February'
-    | 'March'
-    | 'April'
-    | 'May'
-    | 'June'
-    | 'July'
-    | 'August'
-    | 'September'
-    | 'October'
-    | 'November'
-    | 'December'
+  title: ITitle;
+  year: number;
+  code: ICode;
+  startMonth: IMonth;
 
-  endMonth:
-    | 'January'
-    | 'February'
-    | 'March'
-    | 'April'
-    | 'May'
-    | 'June'
-    | 'July'
-    | 'August'
-    | 'September'
-    | 'October'
-    | 'November'
-    | 'December'
-}
+  endMonth: IMonth;
+};
 
-export type AcademicSemisterMOdel = Model<IAcademicSemister>
+export type AcademicSemisterMOdel = Model<IAcademicSemister>;
