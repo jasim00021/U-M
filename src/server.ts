@@ -1,40 +1,58 @@
-import mongoose from 'mongoose'
-import app from './app/app'
-import config from './app/config/index'
-import { logger, errorlogger } from './shared/logger'
-import { Server } from 'http'
-let server: Server
+import mongoose from 'mongoose';
+import app from './app/app';
+import config from './app/config/index';
+import { logger, errorlogger } from './shared/logger';
+import { Server } from 'http';
+import globalErrorHandler from './app/middleware/globalErrorHandler';
+let server: Server;
 
 async function DbConnect() {
   try {
-    await mongoose.connect(config.database_url as string)
-    logger.info(`Database connected...`)
+    await mongoose.connect(config.database_url as string);
+    logger.info(`Database connected...`);
     server = app.listen(config.port, () => {
-      logger.info(`Application listening on port ${config.port}`)
-    })
+      logger.info(`Application listening on port ${config.port}`);
+    });
   } catch (error) {
-    errorlogger.error(`Database connection error: ${error}`)
+    errorlogger.error(`Database connection error: ${error}`);
   }
-  process.on('unhandledRejection', error => {
-    console.log('Unhandled Rejection detected , we are closing our server...')
-    if (server) {
-      server.close(() => {
-        errorlogger.error(error)
-      })
-    }
-    process.exit(1)
-  })
 }
-DbConnect()
+
+process.on('unhandledRejection', error => {
+  console.log(
+    'Unhandled Rejection detected , we are closing our server...',
+    error
+  );
+  if (server) {
+    server.close(() => {
+      errorlogger.error(error);
+    });
+  }
+  process.exit(1);
+});
+
 process.on('uncaughtException', err => {
-  console.log('uncaughtException Exception is detected ')
-  errorlogger.error(err)
-  process.exit(1)
-})
+  console.log('uncaughtException Exception is detected ');
+  errorlogger.error(err);
+  process.exit(1);
+});
+DbConnect();
 
 process.on('SIGTERM', () => {
-  errorlogger.info('SIGTERM is received')
+  errorlogger.info('SIGTERM is received');
   if (server) {
-    server.close()
+    server.close();
   }
-})
+});
+process.on('rejectionHandled', error => {
+  console.log(
+    'rejectionHandled Rejection detected , we are closing our server...',
+    error
+  );
+  if (server) {
+    server.close(() => {
+      errorlogger.error(error);
+    });
+  }
+  process.exit(1);
+});

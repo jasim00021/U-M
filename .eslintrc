@@ -13,7 +13,7 @@
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "no-unused-vars":["error","type"],
-    "@typescript-eslint/no-console":"error"
+    "@typescript-eslint/no-console":["error","warn"]
     
     
   },

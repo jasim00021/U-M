@@ -18,11 +18,13 @@ export type ICode = '01' | '02' | '03';
 
 export type IAcademicSemister = {
   title: ITitle;
-  year: number;
+  year: string;
   code: ICode;
   startMonth: IMonth;
-
   endMonth: IMonth;
 };
 
+export type IAcademicSemisterFilter = {
+  searchTerm: string;
+};
 export type AcademicSemisterMOdel = Model<IAcademicSemister>;
